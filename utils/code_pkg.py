@@ -17,9 +17,8 @@ def packaged_code(base_path: Path) -> bytes:
     Returns:
         (bytes): Raw bytes of the packaged code
     """
-    tempfile = TemporaryFile("w+b")
-
-    with PyZipFile(tempfile, "w") as pzf:
-        pzf.writepy(base_path)  # type: ignore
-
-    return tempfile.read()
+    with TemporaryFile("w+b") as fp:
+        with PyZipFile(fp, "w") as pzf:
+            pzf.writepy(base_path)  # type: ignore
+        fp.seek(0)
+        return fp.read()
