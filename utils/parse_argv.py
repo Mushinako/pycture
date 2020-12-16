@@ -17,15 +17,14 @@ def parse_argv() -> _Args:
     Returns:
         (_Args): The Namespace object containing all the command-line arguments
     """
-    parser = ArgumentParser(description="Infect your image with my code!")
+    parser = ArgumentParser(description="infect your image with my code!")
     parser.add_argument(
         "victim_path",
         type=_valid_path,
         help="path to the victim image file",
     )
 
-    args = parser.parse_args(namespace=_Args())
-    return args
+    return parser.parse_args(namespace=_Args())
 
 
 class _Args(Namespace):
