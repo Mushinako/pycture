@@ -2,7 +2,7 @@
 Parsing command-line arguments for Pycture
 
 Public Functions:
-    parse_argv() -> _Args: Parsing arguments into Namespace object
+    parse_argv: Parsing arguments into Namespace object
 """
 
 from __future__ import annotations
@@ -23,6 +23,13 @@ def parse_argv() -> _Args:
         type=_valid_path,
         help="path to the victim image file",
     )
+    parser.add_argument(
+        "-r",
+        "--reverse",
+        action="store_true",
+        help="reverse infected image (But why?)",
+        dest="reverse",
+    )
 
     return parser.parse_args(namespace=_Args())
 
@@ -33,20 +40,16 @@ class _Args(Namespace):
 
     Class attributes:
         victim_path (pathlib.Path): A Path object pointing to the victim
+        reverse     (bool)        : Whether to reverse an infection
     """
 
     victim_path: Path
+    reverse: bool
 
 
 def _valid_path(path_str: str) -> Path:
     """
     Check if a path is valid. If so, resolve and return it
-
-    Args:
-        path_str (str): A path string supposedly pointing to a file
-
-    Returns:
-        (pathlib.Path): Corresponding Path object with absolute path
     """
     path = Path(path_str)
     if not path.is_file():

