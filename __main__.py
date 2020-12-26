@@ -3,6 +3,7 @@
 Pycture main code
 """
 
+from time import sleep
 from pathlib import Path
 
 from utils.parse_argv import parse_argv
@@ -20,7 +21,13 @@ def pycture() -> None:
     img_io = Image_IO(args.victim_path)
     img_bytes = img_io.read()
     if args.reverse:
-        print("No")
+        print("No 😡")
+        sleep(10)
+        print("OK fine 😥")
+        footer = read_footer(img_bytes)
+        original_bytes = img_bytes[: footer.size]
+        img_io.write(original_bytes)
+        print("Done 😭")
     else:
         if not checks(img_bytes):
             print(f"{args.victim_path} is already infected 🎉")
