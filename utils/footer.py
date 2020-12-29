@@ -29,7 +29,7 @@ def create_footer(img_bytes: bytes) -> _Footer:
     Returns:
         (_Footer): Footer data
     """
-    return _Footer.create(img_bytes)
+    return _Footer.from_uninfected(img_bytes)
 
 
 def read_footer(img_bytes: bytes) -> _Footer:
@@ -42,7 +42,7 @@ def read_footer(img_bytes: bytes) -> _Footer:
     Returns:
         (_Footer): Footer data
     """
-    return _Footer.read(img_bytes)
+    return _Footer.from_infected(img_bytes)
 
 
 class _Footer:
@@ -85,7 +85,7 @@ class _Footer:
         )
 
     @classmethod
-    def create(cls, img_bytes: bytes) -> _Footer:
+    def from_uninfected(cls, img_bytes: bytes) -> _Footer:
         """
         Create a footer from uninfected image bytes
         """
@@ -93,7 +93,7 @@ class _Footer:
         return cls(size)
 
     @classmethod
-    def read(cls, img_bytes: bytes) -> _Footer:
+    def from_infected(cls, img_bytes: bytes) -> _Footer:
         """
         Read a footer from infected image bytes
         """

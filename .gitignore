@@ -1,8 +1,12 @@
 # Python sheningas
 __pycache__/
+/Include/
+/Lib/
+/Scripts/
+/pyvenv.cfg
 
 # VSCode sheningas
 .vscode/
 
 # Testing sheningas
-/tests/
+/examples/
