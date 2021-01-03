@@ -5,16 +5,16 @@ you do! That's why I hereby present `pycture`!
 
 ## How to use
 
-Run this folder on an image:
+Run `pycture` on an image:
 
 ```bash
-python3 . test.jpg
+python3 pycture victim.jpg
 ```
 
 Then image will then be converted and used to spread the joy to other images!
 
 ```bash
-python3 test.jpg test.png
+python3 victim.jpg another-victim.png
 ```
 
 The images themselves can still be viewed as normal!
